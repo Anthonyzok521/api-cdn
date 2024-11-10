@@ -14,22 +14,31 @@ export const getEvents = async (req: Request, res: Response) => {
   }
 }
 
-export const createEvent = async (req: Request, res: Response) => {
-  const { title, description, date, image } = req.body;
+export const createEvent = async (req: Request, res: Response): Promise<void> => {
+  const { title, description, location } = req.body;
 
-  if (!title || !description || !date || !image) {
-    return res.status(400).json({ message: 'Todos los campos son requeridos' });
+  if (!title || !description || !location) {
+    res.status(400).json({ message: 'Todos los campos son requeridos' });
+    return;
   }
-
+ 
   try {
-    const newEvent = new events({ title, description, date, image });
+    const newEvent = new events({ 
+      title, 
+      description, 
+      image: 'https://cdn.mariachici.com/media/' + req.file?.path,
+      datetime: new Date(),
+      location });
+
     await newEvent.save();
-    res.status(201).json(newEvent);
+
+    console.log(req.file);
+    res.status(200).json({ message: 'Event created' });
   } catch (error: unknown) {
     if (error instanceof Error) {
-      res.status(404).json({ message: error.message });
+      res.status(500).json({ message: error.message });
     } else {
-      res.status(404).json({ message: 'Error desconocido' });
+      res.status(500).json({ message: 'An unknown error occurred' });
     }
   }
 }

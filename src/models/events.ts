@@ -6,7 +6,11 @@ const eventsSchema = new mongoose.Schema({
     image: {type: String},
     positionImage: {type: String},
     datetime: {type: String},
-    location: {type: String}
-});
+    location: {type: String},
+}, {versionKey: false
+
+}
+);
+
 
 export default mongoose.models.events || mongoose.model("events", eventsSchema);

@@ -1,16 +1,26 @@
 import multer from 'multer';
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
+// @ts-ignore
+import ftpStorage from 'multer-ftp';
+import path from 'path';
+import { v4 as uuidv4 } from 'uuid';
 
-const storage = multer.diskStorage({
-    destination: function (req: Request, file, cb) {
-      cb(null, 'uploads/images')
+const upload = multer({
+  storage: new ftpStorage({
+    basepath: '/remote/media/',
+    ftp: {
+      host: '157.173.125.177',
+      secureOptions: { rejectUnauthorized: false },
+      secure: true,
+      user: 'acteam',
+      password: 'Bf38pPcwRBkPMnsH',
+      port: 21
     },
-    filename: function (req: Request, file, cb) {
-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-      cb(null, file.fieldname + '-' + uniqueSuffix)
+
+    destination: (req: Request, file: any, options: any, callback: any) => {
+      callback(null, uuidv4() + path.extname(file.originalname));
     }
   })
-  
-  const upload = multer({ storage: storage })
+});
 
-  export default upload;
+export default upload;
