@@ -18,7 +18,7 @@ const upload = multer({
     },
 
     destination: (req: Request, file: any, options: any, callback: any) => {
-      callback(null, uuidv4() + path.extname(file.originalname));
+      callback(null, 'media/' + uuidv4() + path.extname(file.originalname));
     }
   })
 });
