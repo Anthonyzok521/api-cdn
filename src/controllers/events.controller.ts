@@ -1,5 +1,5 @@
 import events from "../models/events";
-import { Request, Response } from 'express';
+import e, { Request, Response } from 'express';
 
 export const getEvents = async (req: Request, res: Response) => {
     try {
@@ -38,7 +38,9 @@ export const createEvent = async (req: Request, res: Response): Promise<void> =>
 export const deleteEvent = async (req: Request, res: Response) => {
     try {
         const { _id } = req.params;
-        await events.findByIdAndDelete(_id);
+        const find = await events.findById(_id);
+        if (!find) { res.status(404).json({ message: 'Event not found' }); return; }
+        const data = await events.findByIdAndDelete(_id);
         res.status(200).json({ message: 'Event deleted' });
     } catch (error) {
         if (error instanceof Error) { res.status(404).json({ message: error.message }); return; }

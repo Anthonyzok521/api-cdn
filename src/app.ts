@@ -12,7 +12,7 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 
 const app = express();
-const port = 3003;
+const port = process.env.PORT
 
 app.use(cookieParser(process.env.SECRET_KEY?.toString(), {
 
