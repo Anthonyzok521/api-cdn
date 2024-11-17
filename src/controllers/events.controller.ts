@@ -15,7 +15,7 @@ export const createEvent = async (req: Request, res: Response): Promise<void> =>
 
     try {
         const { name, description, city, imageUrl, date, fullDescription } = req.body;
-
+        console.log(req.body)
         if (!name || !description || !city || !imageUrl || !date || !fullDescription) { res.status(400).json({ message: 'Todos los campos son requeridos' }); return; }
         const newEvent = new events({
             name,
@@ -38,7 +38,9 @@ export const createEvent = async (req: Request, res: Response): Promise<void> =>
 export const deleteEvent = async (req: Request, res: Response) => {
     try {
         const { _id } = req.params;
-        await events.findByIdAndDelete(_id);
+        const find = await events.findById(_id);
+        if (!find) { res.status(404).json({ message: 'Event not found' }); return; }
+        const data = await events.findByIdAndDelete(_id);
         res.status(200).json({ message: 'Event deleted' });
     } catch (error) {
         if (error instanceof Error) { res.status(404).json({ message: error.message }); return; }
