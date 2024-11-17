@@ -12,8 +12,11 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 
 const app = express();
-const port = 3000;
-app.use(cookieParser());
+const port = 3003;
+
+app.use(cookieParser(process.env.SECRET_KEY?.toString(), {
+
+}));
 app.use(cors());
 app.use(express.json());
 

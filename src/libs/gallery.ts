@@ -1,5 +1,5 @@
 import multer from 'multer';
-import { Request, Response, NextFunction } from 'express';
+import { Request } from 'express';
 // @ts-ignore
 import ftpStorage from 'multer-ftp';
 import path from 'path';

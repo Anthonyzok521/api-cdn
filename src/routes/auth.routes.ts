@@ -6,7 +6,7 @@ const router = Router();
 
 router.post('/auth', authMiddleware);
 router.get('/admin',check, (req: Request, res: Response) => {
-    res.status(200).json({message: 'Autorizado'})
+    res.status(200).json({message: 'Autorizado', auth: true});
 });
 
 export default router;
