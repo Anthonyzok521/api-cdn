@@ -10,14 +10,14 @@ export const sendMail = async (req: Request, res: Response) => {
         const mailOptions = {
             from: email,
             to: 'contacto@mariachici.com',
-            subject: 'Mensaje enviado desde Mariachici.com',
+            subject: 'Mensaje enviado desde www.mariachici.com',
             text: message
         };
 
         await transporter.sendMail(mailOptions);
         res.status(200).json({ message: 'Email sent' });
-    
+
     } catch (error) {
         res.status(404).json({ message: 'An unknown error occurred' });
-    }   
+    }
 }

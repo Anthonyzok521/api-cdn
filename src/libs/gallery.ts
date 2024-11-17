@@ -48,18 +48,17 @@ export const deleteFile = async (req: Request, res: Response, next: NextFunction
       port: port as number
     });
   client.on('ready',  () => {
-    client.delete(path.path.split('com/')[1], (err) => {
-   
+    client.delete(path.path.split('com/')[1], (err: any) => {
+
       if (err) {
         console.log('Failed to delete file from FTP', err.message);
       }
       client.end();
       next();
     });
-    
+
   });
   } catch (error) {
     res.status(404).json({ message: 'An unknown error occurred' });
   }
 }
-

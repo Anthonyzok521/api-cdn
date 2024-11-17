@@ -1,7 +1,6 @@
 import galleries from '../models/galleries';
 import { Request, Response } from 'express';
 import dotenv from 'dotenv';
-import * as ftp from '../libs/gallery';
 
 dotenv.config();
 

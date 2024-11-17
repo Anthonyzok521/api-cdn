@@ -3,7 +3,6 @@ import './db';
 import dotenv from 'dotenv';
 dotenv.config();
 
-
 import configRoutes from './routes/config.routes';
 import eventsRoutes from './routes/events.routes';
 import galeryRoutes from './routes/galery.routes';

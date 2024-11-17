@@ -1,5 +1,5 @@
 import events from "../models/events";
-import e, { Request, Response } from 'express';
+import { Request, Response } from 'express';
 
 export const getEvents = async (req: Request, res: Response) => {
     try {
@@ -15,7 +15,7 @@ export const createEvent = async (req: Request, res: Response): Promise<void> =>
 
     try {
         const { name, description, city, imageUrl, date, fullDescription } = req.body;
-
+        console.log(req.body)
         if (!name || !description || !city || !imageUrl || !date || !fullDescription) { res.status(400).json({ message: 'Todos los campos son requeridos' }); return; }
         const newEvent = new events({
             name,
