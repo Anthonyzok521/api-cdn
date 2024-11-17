@@ -21,7 +21,7 @@ export const createGallery = async (req: Request, res: Response): Promise<void> 
 
         if (!title || !type) { res.status(400).json({ message: 'All fields are required' }); return; }
 
-        const mediaUrl = process.env.MEDIA_URL || 'https://cdn.mariachici.com/';
+        const mediaUrl = process.env.MEDIA_URL || '';
         const newGallery = new galleries({
             title,
             type,

@@ -1,4 +1,3 @@
-import { text } from "stream/consumers";
 import transporter from "../libs/mailer";
 import { Request, Response } from 'express';
 
